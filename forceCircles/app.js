@@ -63,7 +63,7 @@ var init = function() {
   var width = 960, height = 500;
   var nodes = d3.range(200).map(function() { return {radius: Math.random() * 12 + 4}; });
   var root = nodes[0];
-  var colors = ["#FFBE0B", "#FB5607", "#FF006E", "#8338EC", "#3A86FF"];
+  var colors = ["#9B5DE5", "#F15BB5", "#FEE440", "#00BBF9", "#00F5D4"];
 
   root.radius = 0;
   root.fixed = true;
