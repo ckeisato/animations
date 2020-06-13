@@ -1,5 +1,12 @@
+// globals
+var force = null;
+var pointerCharge = -1000;
+var nodeCharge = -5
+var gravity = 0.05;
+
+// helpers
 // returns whether or not a node is colliding
-function collide(node) {
+var collide = function(node) {
   var r = node.radius + 16,
     nx1 = node.x - r,
     nx2 = node.x + r,
@@ -24,32 +31,59 @@ function collide(node) {
   };
 }
 
-const main = function(){
+
+var updateForce = function() {
+  force.charge(function(d, i) {
+    return i == 0 ? pointerCharge : nodeCharge;
+  });
+  force.start();
+}
+
+// UI functions
+var updatePointerCharge = function(targetID, val) {
+  document.getElementById(targetID).innerHTML = val;
+  pointerCharge = val;
+  updateForce();
+}
+
+var updateNodeCharge = function(targetID, val) {
+  document.getElementById(targetID).innerHTML = val;
+  nodeCharge = val;
+  updateForce();
+}
+
+var updateGravity = function(targetID, val) {
+  document.getElementById(targetID).innerHTML = val;
+  gravity = val;
+  force.gravity(gravity);
+  force.start();
+}
+
+var init = function() {
   var width = 960, height = 500;
   var nodes = d3.range(200).map(function() { return {radius: Math.random() * 12 + 4}; });
   var root = nodes[0];
-  var color = d3.scale.category10();
+  var colors = ["#FFBE0B", "#FB5607", "#FF006E", "#8338EC", "#3A86FF"];
 
   root.radius = 0;
   root.fixed = true;
 
-  var force = d3.layout.force()
-    .gravity(0.05)
+  force = d3.layout.force()
+    .gravity(gravity)
     .charge(function(d, i) {
-      return i == 0 ? -1000 : -5;
+      return i == 0 ? pointerCharge : nodeCharge;
     })
     .nodes(nodes)
     .size([width, height]);
 
   force.start();
 
-  var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
-
+  var svg = d3.select("#container").append("svg");
   svg.selectAll("circle")
     .data(nodes.slice(1))
     .enter().append("circle")
     .attr("r", function(d) { return d.radius; })
-    .style("fill", function(d, i) { return color(i % 3); });
+    .style("fill", function(d, i) { return colors[i%5] });
 
   force.on("tick", function(e) {
     var q = d3.geom.quadtree(nodes);
@@ -69,8 +103,6 @@ const main = function(){
     root.py = p1[1];
     force.resume();
   });
-
-
 }
 
-main();
+init();
