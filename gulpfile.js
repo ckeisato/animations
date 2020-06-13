@@ -8,10 +8,6 @@ var rename = require('gulp-rename');
 var htmlmin = require('gulp-htmlmin');
 
 var node_modules_path = './node_modules';
-// var paths = {
-// 	'node': './node_modules',
-// 	'assets': './assets'
-// }
 
 // remove files in the public folder
 gulp.task('clean', function(){
@@ -26,33 +22,33 @@ gulp.task('serve', function(){
 		}
 	});
 
-	gulp.watch('index.html', ['pages']);
-	gulp.watch('app.css',['styles']);
-	gulp.watch('app.js',['scripts']);
+	gulp.watch(['forceCircles/*.html', 'index.html'], ['pages']);
+	gulp.watch('forceCircles/*.css',['styles']);
+	gulp.watch('forceCircles/*.js',['scripts']);
 
-  gulp.watch(['app.css', 'app.js', 'index.html']).on('change', browserSync.reload);
+  gulp.watch(['index.html', 'forceCircles/*.css', 'forceCircles/*.js', 'forceCircles/*.html']).on('change', browserSync.reload);
 });
 
 
 gulp.task('pages', function(){
-	return gulp.src('index.html')
+	return gulp.src(['**/*.html', '!public/**'])
 		.pipe(htmlmin({
 			collapseWhitespace: true
 		}))
-		.pipe(gulp.dest('./public'), { base: '.' });
+		.pipe(gulp.dest('./public'));
 
 });
 
 // compiles styles with foundation base styles
 gulp.task('styles', function(){
-	gulp.src('app.css')
+	gulp.src(['**/*.css', '!public/**'])
 	.pipe(cssmin())
-	.pipe(gulp.dest('./public'), { base: '.'});
+	.pipe(gulp.dest('./public'));
 });
 
 
 gulp.task('scripts', function(){
-	gulp.src('app.js')
+	gulp.src(['**/*.js', '!gulpfile.js', '!public/**'])
 		.pipe(gulp.dest('./public'));
 });
 
