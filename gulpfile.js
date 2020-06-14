@@ -23,10 +23,10 @@ gulp.task('serve', function(){
 	});
 
 	gulp.watch(['forceCircles/*.html', 'index.html'], ['pages']);
-	gulp.watch('forceCircles/*.css',['styles']);
+	gulp.watch(['forceCircles/*.css', 'app.css'], ['styles']);
 	gulp.watch('forceCircles/*.js',['scripts']);
 
-  gulp.watch(['index.html', 'forceCircles/*.css', 'forceCircles/*.js', 'forceCircles/*.html']).on('change', browserSync.reload);
+  gulp.watch(['index.html', 'app.css', 'forceCircles/*.css', 'forceCircles/*.js', 'forceCircles/*.html']).on('change', browserSync.reload);
 });
 
 
