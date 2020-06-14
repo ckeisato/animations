@@ -31,7 +31,7 @@ gulp.task('serve', function(){
 
 
 gulp.task('pages', function(){
-	return gulp.src(['**/*.html', '!public/**'])
+	return gulp.src(['**/*.html', '!public/**', '!node_modules/**'])
 		.pipe(htmlmin({
 			collapseWhitespace: true
 		}))
@@ -41,14 +41,14 @@ gulp.task('pages', function(){
 
 // compiles styles with foundation base styles
 gulp.task('styles', function(){
-	gulp.src(['**/*.css', '!public/**'])
+	gulp.src(['**/*.css', '!public/**', '!node_modules/**'])
 	.pipe(cssmin())
 	.pipe(gulp.dest('./public'));
 });
 
 
 gulp.task('scripts', function(){
-	gulp.src(['**/*.js', '!gulpfile.js', '!public/**'])
+	gulp.src(['**/*.js', '!gulpfile.js', '!public/**', '!node_modules/**'])
 		.pipe(gulp.dest('./public'));
 });
 
