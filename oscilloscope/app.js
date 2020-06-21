@@ -29,40 +29,39 @@ const main = () => {
 
   var svg = createSvg('body', svgHeight, svgWidth);
 
-  // Create our initial D3 chart.
-  svg.selectAll('rect')
-     .data(frequencyData)
-     .enter()
-     .append('rect')
-     .attr('x', function (d, i) {
-        return i * (svgWidth / frequencyData.length);
-     })
-     .attr('width', svgWidth / frequencyData.length - barPadding);
+  var spiral = Array.from({ length: 20 }, (_, i) => [
+    ((Math.PI / 3) /20) * i, // angle (in radians)
+    2 * i // radius
+  ])
 
+
+  console.log('spiral', spiral);
+
+
+  var lineRadial = d3.svg.line.radial();  
+  svg.append("path")
+    .attr("transform", "translate(200, 200)")
+    .attr("d", lineRadial(spiral))
+    .attr("fill", "none")
+    .attr("stroke", "black");
 
   // Continuously loop and update chart with frequency data.
   function renderChart() {
    requestAnimationFrame(renderChart);
 
    // Copy frequency data to frequencyData array.
-   analyser.getByteFrequencyData(frequencyData);
+    analyser.getByteFrequencyData(frequencyData);
+    var test = spiral.map((coord, index) => {
+      return [coord[0], frequencyData[index] * 4]
+    });
 
-   // Update d3 chart with new data.
-   svg.selectAll('rect')
-      .data(frequencyData)
-      .attr('y', function(d) {
-         return svgHeight - d;
-      })
-      .attr('height', function(d) {
-         return d;
-      })
-      .attr('fill', function(d) {
-         return 'rgb(0, 0, ' + d + ')';
-      });
+    // console.log('test', test);
+    
+    svg.select('path').attr("d", lineRadial(test));
   }
 
   // Run the loop
-  renderChart();
+  // renderChart();
 
 
 
