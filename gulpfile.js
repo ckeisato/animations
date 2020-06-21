@@ -8,6 +8,8 @@ var rename = require('gulp-rename');
 var htmlmin = require('gulp-htmlmin');
 
 var node_modules_path = './node_modules';
+// var curr_project = 'forceCircles/';
+var curr_project = 'oscilloscope/';
 
 // remove files in the public folder
 gulp.task('clean', function(){
@@ -22,11 +24,11 @@ gulp.task('serve', function(){
 		}
 	});
 
-	gulp.watch(['forceCircles/*.html', 'index.html'], ['pages']);
-	gulp.watch(['forceCircles/*.css', 'app.css'], ['styles']);
-	gulp.watch('forceCircles/*.js',['scripts']);
+	gulp.watch([curr_project + '*.html', 'index.html'], ['pages']);
+	gulp.watch([curr_project + '*.css', 'app.css'], ['styles']);
+	gulp.watch(curr_project + '*.js',['scripts']);
 
-  gulp.watch(['index.html', 'app.css', 'forceCircles/*.css', 'forceCircles/*.js', 'forceCircles/*.html']).on('change', browserSync.reload);
+  gulp.watch(['index.html', 'app.css', curr_project + '*.css', curr_project + '*.js', curr_project + '*.html']).on('change', browserSync.reload);
 });
 
 
@@ -52,7 +54,11 @@ gulp.task('scripts', function(){
 		.pipe(gulp.dest('./public'));
 });
 
+gulp.task('media', function(){
+	gulp.src(['**/*.mp3', '!gulpfile.js', '!public/**', '!node_modules/**'])
+		.pipe(gulp.dest('./public'));
+});
 
-gulp.task('default', ['pages', 'styles','scripts', 'serve']);
+gulp.task('default', ['pages', 'styles','scripts', 'media', 'serve']);
 
-gulp.task('build', ['pages', 'styles', 'scripts']);
+gulp.task('build', ['pages', 'styles', 'scripts', 'media']);
