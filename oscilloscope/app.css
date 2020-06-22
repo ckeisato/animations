@@ -3,7 +3,45 @@ h1 {
   font-weight: 700;
 }
 
-h4, p {
+h4, p, label, select {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
+  color: white;
+}
+
+.line {
+  transform: translate(50%, 50%);
+}
+
+.container {
+  position: relative;
+  background: rgb(238,174,202);
+  background: linear-gradient(145deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+
+.svg-container {
+  position: absolute;
+  top: 0;
+  left: 5vw;
+  box-sizing: border-box;
+}
+
+.info {
+  position: absolute;
+  top: 85vh;
+  left: 20px;
+}
+
+.select-interpolation {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+select {
+  border: 2px solid white;
+  background: transparent;
+  border-radius: 5px;
+  font-size: 15px;
+}
 }
