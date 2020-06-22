@@ -34,7 +34,11 @@ h4, p, label, select {
 }
 
 .text {
+  position: absolute;
+  top: 0;
+  left: 0;
   padding: 20px;
+  z-index: 1;
 }
 
 select {
