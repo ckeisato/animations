@@ -15,7 +15,7 @@ const main = () => {
 
   var frequencyData = new Uint8Array(360);
 
-  var svgHeight = '90vh';
+  var svgHeight = '85vh';
   var svgWidth = '90vw';
 
   function createSvg(parent, height, width) {

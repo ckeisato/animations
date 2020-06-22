@@ -8,25 +8,29 @@
   <link rel="stylesheet" href="app.css">
 </head>
   <body class="container">
-    <div id="svg-container" class="svg-container"></div>
-    <div class="select-interpolation">
-      <label for="interpolate">Interpolation mode:</label>
-      <select class="" name="interpolation" id="select-interpolation">
-        <option value="linear">linear</option>
-        <option value="linear-closed" selected="linear-closed">linear-closed</option>
-        <option value="step">step</option>
-        <option value="step-before">step-before</option>
-        <option value="step-after">step-after</option>
-        <option value="basis">basis</option>
-        <option value="basis-open">basis-open</option>
-        <option value="basis-closed">basis-closed</option>
-        <option value="bundle">bundle</option>
-        <option value="cardinal">cardinal</option>
-        <option value="cardinal-open">cardinal-open</option>
-        <option value="cardinal-closed">cardinal-closed</option>
-        <option value="monotone">monotone</option>
-      </select>
+    <div class="text">
+      <h1>D3 Oscilloscope</h1>
+      <p><a href="https://github.com/ckeisato/animations/tree/master/oscilloscope">Source code</a></p>
+      <div class="select-interpolation">
+        <label for="interpolate">Interpolation mode:</label>
+        <select class="" name="interpolation" id="select-interpolation">
+          <option value="linear">linear</option>
+          <option value="linear-closed" selected="linear-closed">linear-closed</option>
+          <option value="step">step</option>
+          <option value="step-before">step-before</option>
+          <option value="step-after">step-after</option>
+          <option value="basis">basis</option>
+          <option value="basis-open">basis-open</option>
+          <option value="basis-closed">basis-closed</option>
+          <option value="bundle">bundle</option>
+          <option value="cardinal">cardinal</option>
+          <option value="cardinal-open">cardinal-open</option>
+          <option value="cardinal-closed">cardinal-closed</option>
+          <option value="monotone">monotone</option>
+        </select>
+      </div>
     </div>
+    <div id="svg-container" class="svg-container"></div>
     <p class="info">
       Artist: Simon More
       <br>
