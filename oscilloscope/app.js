@@ -1,8 +1,5 @@
-// create oscilloscope 
-// create service + google storage bucket with other songs????
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-
 const main = () => {
+  var AudioContext = window.AudioContext || window.webkitAudioContext;
   var audio = new Audio('simon-more_dreamland.mp3');
   // audio.autoplay = true;
   audio.loop = true;
@@ -42,6 +39,7 @@ const main = () => {
   });
 
   document.getElementById('audio-cta').addEventListener('click', event => {
+    context.resume();
     if (audio.paused) {
       event.target.innerText = "Pause"
       audio.play();
@@ -55,7 +53,6 @@ const main = () => {
   renderChart();
 }
 
-main();
-
-
-
+window.onload = () => {
+  main();
+}
