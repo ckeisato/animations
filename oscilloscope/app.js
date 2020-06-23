@@ -48,6 +48,10 @@ const main = () => {
     }
   });
 
+  setInterval(() => {
+    document.getElementById('container').classList.toggle('gradient-two')
+  }, 10000);
+
   // Run the loop
   renderChart();
 }
