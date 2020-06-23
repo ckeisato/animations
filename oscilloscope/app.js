@@ -1,7 +1,6 @@
 const main = () => {
   var AudioContext = window.AudioContext || window.webkitAudioContext;
   var audio = new Audio('simon-more_dreamland.mp3');
-  // audio.autoplay = true;
   audio.loop = true;
 
   var context = new AudioContext();
