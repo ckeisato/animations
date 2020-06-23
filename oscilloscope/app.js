@@ -4,7 +4,7 @@ var AudioContext = window.AudioContext || window.webkitAudioContext;
 
 const main = () => {
   var audio = new Audio('simon-more_dreamland.mp3');
-  audio.autoplay = true;
+  // audio.autoplay = true;
   audio.loop = true;
 
   var context = new AudioContext();
@@ -15,18 +15,11 @@ const main = () => {
 
   var frequencyData = new Uint8Array(360);
 
-  var svgHeight = '85vh';
-  var svgWidth = '90vw';
-
-  function createSvg(parent, height, width) {
-    return d3.select(parent).append('svg').attr('height', height).attr('width', width);
-  }
-
-  var svg = createSvg('#svg-container', svgHeight, svgWidth);
+  var svg = d3.select('#svg-container').append('svg').attr('height', '85vh').attr('width', '90vw');
 
   var line = d3.svg.line.radial()
     .interpolate("linear-closed")
-    .radius(d => (d / 2) + 100)
+    .radius(d => (d / 2) + 150)
     .angle((d, i) => i * (Math.PI/180));
 
   var path = svg.append('path')
@@ -35,7 +28,6 @@ const main = () => {
     .attr('stroke-width', 2)
     .attr('fill', 'transparent')
     .attr('class', 'line');
-
 
   // Continuously loop and update chart with frequency data.
   const renderChart = () => {
@@ -46,8 +38,17 @@ const main = () => {
 
 
   document.getElementById('select-interpolation').addEventListener('change', event => {
-    console.log('hello', event.target.value);
     line.interpolate(event.target.value);
+  });
+
+  document.getElementById('audio-cta').addEventListener('click', event => {
+    if (audio.paused) {
+      event.target.innerText = "Pause"
+      audio.play();
+    } else {
+      audio.pause();
+      event.target.innerText = "Play"
+    }
   });
 
   // Run the loop
