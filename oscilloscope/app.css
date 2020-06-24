@@ -61,7 +61,7 @@ h4, p, label, select, button {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 20px;
+  padding-left: 20px;
   z-index: 3;
 }
 
