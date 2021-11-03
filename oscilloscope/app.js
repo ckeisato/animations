@@ -6,6 +6,7 @@ const main = () => {
   var context = new AudioContext();
   var analyser = context.createAnalyser();
   var source = context.createMediaElementSource(audio);
+  
   source.connect(analyser);
   analyser.connect(context.destination);
 
